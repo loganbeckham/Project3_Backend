@@ -1,5 +1,5 @@
 const express = require('express')
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 const cors = require('cors')
 
 const app = express();
@@ -13,9 +13,15 @@ if(process.env.PORT) {
 }
 
 app.get('/', (req, res) => {
-    res.send('hi')
+    res.send('hi');
 })
 
+
+// =======================================
+//              LISTENER
+// =======================================
+
+
 app.listen(PORT, () => {
-    console.log('listening')
-})
+    console.log(`App listening on port: 3000`)
+  });
