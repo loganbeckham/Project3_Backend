@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
 //              LISTENER
 // =======================================
 
-const mongodbURI = process.env.MONGODBURI
+// const mongodbURI = process.env.MONGODBURI
 
-mongoose.connect(mongodbURI, () => {
+mongoose.connect('mongodb+srv://NYC_Mat:v1kZxgtLPzrlmSn0@travelapp.gfyzcwn.mongodb.net/?retryWrites=true&w=majority', () => {
     console.log('connected to mongo')
 })
 
