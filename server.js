@@ -1,5 +1,5 @@
 const express = require('express')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
@@ -17,6 +17,12 @@ app.get('/', (req, res) => {
 // =======================================
 //              LISTENER
 // =======================================
+
+const mongodbURI = process.env.MONGODBURI
+
+mongoose.connect(mongodbURI, () => {
+    console.log('connected to mongo')
+})
 
 if(process.env.PORT) {
     PORT = process.env.PORT
