@@ -3,24 +3,55 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
+const Location = require('./models/locations.js')
+
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(cors())
+mongoose.set('strictQuery', true)
 
 
-app.get('/', (req, res) => {
-    res.send('hi');
-})
+
+
+app.post('/locations' , (req, res) => {
+    Location.create(req.body, (err, createdLocation) =>{
+        res.json(createdLocation)
+    });
+});
+
+            //GET ROUTE//
+
+app.get('/locations', (req, res) => {
+    Location.find({}, (err, foundLocations) => {
+        res.json(foundLocations)
+    })
+});
+
+            ///DELETE ROUTE///
+app.delete('/locations/:id', (req, res) => {
+    Location.findByIdAndRemove(req.params.id, (err, deletedLocation) => {
+        res.json(deletedLocation);
+    });
+});
+
+            ///UPDATE ROUTE ///
+
+app.put('/locations/:id', (req, res) => {
+    Location.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedLocation) => {
+        res.json(updatedLocation)
+    })
+});
 
 
 // =======================================
 //              LISTENER
 // =======================================
 
-// const mongodbURI = process.env.MONGODBURI
+const mongodbURI = process.env.MONGODBURI
 
-mongoose.connect('mongodb+srv://NYC_Mat:v1kZxgtLPzrlmSn0@travelapp.gfyzcwn.mongodb.net/?retryWrites=true&w=majority', () => {
+mongoose.connect(`${mongodbURI}`, () => {
     console.log('connected to mongo')
 })
 
