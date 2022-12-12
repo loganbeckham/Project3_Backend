@@ -51,7 +51,7 @@ app.put('/locations/:id', (req, res) => {
 
 const mongodbURI = process.env.MONGODBURI
 
-mongoose.connect(`${mongodbURI}`)
+mongoose.connect(`mongodb+srv://NYC_MAT:c4H9qtWTr0eMPEaK@travelapp.gfyzcwn.mongodb.net/?retryWrites=true&w=majority`)
 
 mongoose.connection.once('open', () => {
     console.log('connected to mongo')
