@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
-mongoose.set('strictQuery', true)
+// mongoose.set('strictQuery', true)
 
 
 
@@ -51,7 +51,9 @@ app.put('/locations/:id', (req, res) => {
 
 const mongodbURI = process.env.MONGODBURI
 
-mongoose.connect(`${mongodbURI}`, () => {
+mongoose.connect(`${mongodbURI}`)
+
+mongoose.connection.once('open', () => {
     console.log('connected to mongo')
 })
 
