@@ -21,6 +21,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+<<<<<<< HEAD
     "mongoose": "^6.8.0"
+=======
+    "mongoose": "^6.8.0",
+    "mongosh": "^1.6.1"
+>>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
   }
 }
