@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
-// mongoose.set('strictQuery', true)
+mongoose.set('strictQuery', true)
 
 
 
