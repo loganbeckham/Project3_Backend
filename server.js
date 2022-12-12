@@ -1,13 +1,30 @@
 const express = require('express')
+<<<<<<< HEAD
+// const mongoose = require('mongoose')
+const cors = require('cors')
+=======
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
 const Location = require('./models/locations.js')
+>>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
 
 const app = express();
 
 app.use(express.json())
+<<<<<<< HEAD
+app.use(cors())
+
+let PORT = 3000
+if(process.env.PORT) {
+    PORT = process.env.PORT
+}
+
+app.get('/', (req, res) => {
+    res.send('hi');
+})
+=======
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 mongoose.set('strictQuery', true)
@@ -43,12 +60,19 @@ app.put('/locations/:id', (req, res) => {
         res.json(updatedLocation)
     })
 });
+>>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
 
 
 // =======================================
 //              LISTENER
 // =======================================
 
+<<<<<<< HEAD
+
+app.listen(PORT, () => {
+    console.log(`App listening on port: 3000`)
+  });
+=======
 const mongodbURI = process.env.MONGODBURI
 
 mongoose.connect(`${mongodbURI}`, () => {
@@ -62,3 +86,4 @@ if(process.env.PORT) {
 app.listen(PORT, () => {
     console.log(`App listening on port: 3000`)
   });
+>>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
