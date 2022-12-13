@@ -6,6 +6,9 @@ require('dotenv').config()
 const Location = require('./models/locations.js')
 
 const app = express();
+//login
+const userController = require('./controllers/users_controller.js')
+app.use('/users', userController)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
