@@ -21,7 +21,6 @@ mongoose.set('strictQuery', true)
 
 
 
-
 app.post('/locations' , (req, res) => {
     Location.create(req.body, (err, createdLocation) =>{
         res.json(createdLocation)
