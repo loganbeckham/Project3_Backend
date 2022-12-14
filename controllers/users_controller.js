@@ -3,6 +3,14 @@ const express = require('express')
 const users = express.Router()
 const User = require('../models/user.js')
 
+const isAuthenticated = (req, res, next) => {
+    if (req.session.currentUser) {
+      return next()
+    } else {
+      res.redirect('/sessions/new')
+    }
+  }
+
 users.get('/new', (req, res) => {
   res.render('users/new.ejs')
 })
@@ -15,5 +23,19 @@ users.post('/', (req, res) => {
     res.redirect('/')
   })
 })
+
+location.get('/:id', (req, res) => {
+    if (req.session.currentUser) {
+      Location.findById(req.params.id, (error, foundLocation) => {
+        res.render('locations/show.js', {
+          location: foundLocation,
+          currentUser: req.session.currentUser
+        })
+      })
+    } else {
+      res.redirect('/sessions/new')
+    }
+  })
+
 
 module.exports = users
