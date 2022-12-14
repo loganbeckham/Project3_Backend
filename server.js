@@ -8,13 +8,16 @@ const Location = require('./models/locations.js')
 const app = express();
 //login
 const userController = require('./controllers/users_controller.js')
+const sessionsController = require('./controllers/sessions_controller.js')
+
 app.use('/users', userController)
+app.use('/sessions', sessionsController)
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 mongoose.set('strictQuery', true)
-
 
 
 
