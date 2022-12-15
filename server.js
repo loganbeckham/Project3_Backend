@@ -2,28 +2,16 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const session = require('express-session')
-
+const app = express();
 require('dotenv').config()
 
-const Location = require('./models/locations.js')
-
-const app = express();
-//login
-const userController = require('./controllers/users_controller.js')
-const sessionsController = require('./controllers/sessions_controller.js')
-
-app.use('/users', userController)
-app.use('/sessions', sessionsController)
-
-
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(cors(
-    {
-		origin:'https://project3-travelapp-backend.herokuapp.com/',
-		credentials:true
-	}
-))
+app.use(cors())
+//     {
+// 		origin:'https://project3-travelapp-backend.herokuapp.com/',
+// 		credentials:true
+// 	}
+// ))
 app.use(
 	session({
 		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
@@ -32,7 +20,14 @@ app.use(
 	})
 )
 
-mongoose.set('strictQuery', true)
+//login
+const userController = require('./controllers/users_controller.js')
+app.use('/users', userController)
+
+const sessionsController = require('./controllers/sessions_controller.js')
+app.use('/sessions', sessionsController)
+
+const Location = require('./models/locations.js')
 
 
 
@@ -42,7 +37,6 @@ app.post('/locations' , (req, res) => {
         console.log(req.body)
     });
 });
-
 
             //GET ROUTE//
 
