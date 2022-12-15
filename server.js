@@ -22,13 +22,13 @@ app.use(cors(
 		credentials:true
 	}
 ))
-app.use(
-	session({
-		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
-		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
-	})
-)
+// app.use(
+// 	session({
+// 		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
+// 		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+// 		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+// 	})
+// )
 
 mongoose.set('strictQuery', true)
 
@@ -37,8 +37,10 @@ mongoose.set('strictQuery', true)
 app.post('/locations' , (req, res) => {
     Location.create(req.body, (err, createdLocation) =>{
         res.json(createdLocation)
+        console.log(req.body)
     });
 });
+
 
             //GET ROUTE//
 
@@ -47,13 +49,6 @@ app.get('/locations', (req, res) => {
         res.json(foundLocations)
     })
 });
-
-        //SHOW ROUTE//
-app.get('/locations/:id', (req, res) => {
-    Location.findById(req.params.id, (err, foundLocation) => {
-        res.json(foundLocation)
-    })
-})
 
             ///DELETE ROUTE///
 app.delete('/locations/:id', (req, res) => {

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
 const sessions = express.Router()
-const User = require('../models/users.js')
+const User = require('../models/user.js')
 
 sessions.get('/new', (req, res) => {
     res.send(req.session.currentUser)
