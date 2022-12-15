@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const session = require('express-session')
+
 require('dotenv').config()
 
 const Location = require('./models/locations.js')
@@ -22,13 +24,13 @@ app.use(cors(
 		credentials:true
 	}
 ))
-// app.use(
-// 	session({
-// 		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
-// 		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-// 		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
-// 	})
-// )
+app.use(
+	session({
+		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
+		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+	})
+)
 
 mongoose.set('strictQuery', true)
 
