@@ -8,7 +8,7 @@ require('dotenv').config()
 app.use(express.json())
 app.use(cors(
     {
-		origin:'https://project3-travelapp-backend.herokuapp.com/',
+		origin:'http://localhost:3001',
 		credentials:true
 	}
 ))
