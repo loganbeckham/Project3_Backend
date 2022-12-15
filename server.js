@@ -47,6 +47,13 @@ app.get('/locations', (req, res) => {
     })
 });
 
+        //SHOW ROUTE//
+app.get('/locations/:id', (req, res) => {
+    Location.findById(req.params.id, (err, foundLocation) => {
+        res.json(foundLocation);
+    })
+})
+
             ///DELETE ROUTE///
 app.delete('/locations/:id', (req, res) => {
     Location.findByIdAndRemove(req.params.id, (err, deletedLocation) => {
