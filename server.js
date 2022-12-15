@@ -5,6 +5,9 @@ const session = require('express-session')
 const app = express();
 require('dotenv').config()
 
+const Location = require('./models/locations.js')
+
+
 app.use(express.json())
 app.use(cors(
     {
@@ -26,8 +29,6 @@ app.use('/users', userController)
 
 const sessionsController = require('./controllers/sessions_controller.js')
 app.use('/sessions', sessionsController)
-
-const Location = require('./models/locations.js')
 
 
 
