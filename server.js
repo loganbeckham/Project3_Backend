@@ -6,12 +6,12 @@ const app = express();
 require('dotenv').config()
 
 app.use(express.json())
-app.use(cors())
-//     {
-// 		origin:'https://project3-travelapp-backend.herokuapp.com/',
-// 		credentials:true
-// 	}
-// ))
+app.use(cors(
+    {
+		origin:'https://project3-travelapp-backend.herokuapp.com/',
+		credentials:true
+	}
+))
 app.use(
 	session({
 		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
