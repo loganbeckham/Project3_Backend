@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors(
     {
-		origin:'https://project3-travelapp-backend.herokuapp.com/new',
+		origin:'https://project3-travelapp-backend.herokuapp.com/',
 		credentials:true
 	}
 ))
