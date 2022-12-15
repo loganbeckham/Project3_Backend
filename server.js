@@ -1,34 +1,36 @@
 const express = require('express')
-<<<<<<< HEAD
-// const mongoose = require('mongoose')
-const cors = require('cors')
-=======
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
 const Location = require('./models/locations.js')
->>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
 
 const app = express();
+//login
+const userController = require('./controllers/users_controller.js')
+const sessionsController = require('./controllers/sessions_controller.js')
+
+app.use('/users', userController)
+app.use('/sessions', sessionsController)
+
 
 app.use(express.json())
-<<<<<<< HEAD
-app.use(cors())
-
-let PORT = 3000
-if(process.env.PORT) {
-    PORT = process.env.PORT
-}
-
-app.get('/', (req, res) => {
-    res.send('hi');
-})
-=======
 app.use(express.urlencoded({extended: true}))
-app.use(cors())
-mongoose.set('strictQuery', true)
+app.use(cors(
+    {
+		origin:'https://project3-travelapp-backend.herokuapp.com/',
+		credentials:true
+	}
+))
+app.use(
+	session({
+		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
+		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+	})
+)
 
+mongoose.set('strictQuery', true)
 
 
 
@@ -46,6 +48,13 @@ app.get('/locations', (req, res) => {
     })
 });
 
+        //SHOW ROUTE//
+app.get('/locations/:id', (req, res) => {
+    Location.findById(req.params.id, (err, foundLocation) => {
+        res.json(foundLocation)
+    })
+})
+
             ///DELETE ROUTE///
 app.delete('/locations/:id', (req, res) => {
     Location.findByIdAndRemove(req.params.id, (err, deletedLocation) => {
@@ -60,22 +69,17 @@ app.put('/locations/:id', (req, res) => {
         res.json(updatedLocation)
     })
 });
->>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
 
 
 // =======================================
 //              LISTENER
 // =======================================
 
-<<<<<<< HEAD
-
-app.listen(PORT, () => {
-    console.log(`App listening on port: 3000`)
-  });
-=======
 const mongodbURI = process.env.MONGODBURI
 
-mongoose.connect(`${mongodbURI}`, () => {
+mongoose.connect(`mongodb+srv://NYC_MAT:c4H9qtWTr0eMPEaK@travelapp.gfyzcwn.mongodb.net/?retryWrites=true&w=majority`)
+
+mongoose.connection.once('open', () => {
     console.log('connected to mongo')
 })
 
@@ -86,4 +90,3 @@ if(process.env.PORT) {
 app.listen(PORT, () => {
     console.log(`App listening on port: 3000`)
   });
->>>>>>> d28213f8d38cf71c5ad5761b14ac5abaa89bdeab
