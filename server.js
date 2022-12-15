@@ -16,7 +16,20 @@ app.use('/sessions', sessionsController)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors())
+app.use(cors(
+    {
+		origin:'https://project3-travelapp-backend.herokuapp.com/new',
+		credentials:true
+	}
+))
+app.use(
+	session({
+		secret: 'feedmeseymour', //a random string do not copy this value or your stuff will get hacked
+		resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+		saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+	})
+)
+
 mongoose.set('strictQuery', true)
 
 
